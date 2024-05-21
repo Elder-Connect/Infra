@@ -1,0 +1,11 @@
+DROP TABLE residences;
+DROP TABLE adresses;
+DROP TABLE resumes;
+DROP TABLE specialties;
+DROP TABLE messages;
+DROP TABLE ratings;
+DROP TABLE proposals;
+DROP TABLE calendar;
+DROP TABLE users;
+DROP TABLE genders;
+DROP TABLE user_types;

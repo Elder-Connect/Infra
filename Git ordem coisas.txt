@@ -1,0 +1,13 @@
+git clone -> git checkout dev
+
+git pull -> sempre que começar algo.
+
+git status -> verificar branch e coisas mudadas
+
+git stash -> salvar alterações em uma pasta temporaria
+
+git add . -> toda vez que fizer alguma alteração
+
+git commit -m -> descrição dq foi feito
+
+git push -u origin dev 

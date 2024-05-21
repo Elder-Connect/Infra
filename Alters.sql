@@ -1,0 +1,1 @@
+alter table users alter column document type VARCHAR(18);

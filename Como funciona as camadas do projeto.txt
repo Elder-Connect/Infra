@@ -1,0 +1,15 @@
+Bd  <--->  (BackEnd conecta com o bd)  --> FrontEnd
+
+
+Pacotes: {
+
+Repository: Tudo que for relacionado a dados, vai ser implementado no repository;
+
+Service: Responsavel por processar os dados, validaçãos de campos, vão na camada service;
+
+Controller: Responsavel em mandar os dados para o frontEnd;
+
+Entity: As entidades são as classes do problema;
+
+DTO: Serve para transferir as informações, sendo cópias das entitys, mas sem anotações;
+}
