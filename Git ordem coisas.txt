@@ -1,13 +1,201 @@
-git clone -> git checkout dev
+### Ordem de Comandos Git
 
-git pull -> sempre que começar algo.
+1. **Clone o Repositório:**
+   ```sh
+   git clone <url>
+   ```
 
-git status -> verificar branch e coisas mudadas
+2. **Mudar para a Branch de Desenvolvimento:**
+   ```sh
+   git checkout develop
+   ```
 
-git stash -> salvar alterações em uma pasta temporaria
+3. **Atualizar a Branch:**
+   ```sh
+   git pull
+   ```
 
-git add . -> toda vez que fizer alguma alteração
+4. **Verificar Status
 
-git commit -m -> descrição dq foi feito
+Git flow:
+Vamos adicionar o Git Flow e detalhar seu uso junto com os passos básicos do Git. O Git Flow é uma estratégia de branching que facilita o gerenciamento de releases e features em projetos de software.
 
-git push -u origin dev 
+### Passo a Passo com Git e Git Flow
+
+#### 1. Clonar o Repositório
+```sh
+git clone <url-do-repositorio>
+```
+
+#### 2. Mudar para a Branch de Desenvolvimento
+```sh
+git checkout dev
+```
+
+#### 3. Atualizar a Branch Local com as Alterações do Remoto
+```sh
+git pull
+```
+Sempre faça isso antes de começar a trabalhar para garantir que você tenha as últimas mudanças.
+
+#### 4. Verificar Status do Git
+```sh
+git status
+```
+Isso verifica em qual branch você está e quais arquivos foram modificados.
+
+#### 5. Salvar Alterações em uma Pasta Temporária
+```sh
+git stash
+```
+Use isso se precisar mudar de contexto e salvar temporariamente suas alterações.
+
+#### 6. Adicionar Alterações ao Staging
+```sh
+git add .
+```
+Adicione todas as alterações feitas.
+
+#### 7. Fazer um Commit com Descrição
+```sh
+git commit -m "Descrição do que foi feito"
+```
+Escreva uma mensagem clara e descritiva sobre o que foi alterado.
+
+#### 8. Enviar as Alterações para o Repositório Remoto
+```sh
+git push -u origin dev
+```
+Envie suas mudanças para a branch `dev` no repositório remoto.
+
+### Git Flow
+
+#### Inicializar o Git Flow
+No início do projeto, você deve inicializar o Git Flow:
+```sh
+git flow init
+```
+Aceite as configurações padrão, que geralmente são:
+- Branch principal: `master`
+- Branch de desenvolvimento: `develop`
+- Prefixos para branches de features: `feature/`
+- Prefixos para branches de releases: `release/`
+- Prefixos para branches de hotfixes: `hotfix/`
+- Prefixos para branches de suporte: `support/`
+
+#### Criar uma Nova Feature
+```sh
+git flow feature start nome-da-feature
+```
+Isso cria e muda para uma nova branch de feature com o prefixo `feature/`.
+
+#### Finalizar uma Feature
+```sh
+git flow feature finish nome-da-feature
+```
+Isso mescla a feature na branch `develop` e deleta a branch de feature.
+
+#### Criar uma Release
+```sh
+git flow release start nome-da-release
+```
+Isso cria uma nova branch de release a partir de `develop`.
+
+#### Finalizar uma Release
+```sh
+git flow release finish nome-da-release
+```
+Isso mescla a release nas branches `master` e `develop`, e cria uma tag.
+
+#### Criar um Hotfix
+```sh
+git flow hotfix start nome-do-hotfix
+```
+Isso cria uma nova branch de hotfix a partir de `master`.
+
+#### Finalizar um Hotfix
+```sh
+git flow hotfix finish nome-do-hotfix
+```
+Isso mescla o hotfix nas branches `master` e `develop`, e cria uma tag.
+
+### Passo a Passo Completo com Git Flow
+
+1. **Clone o repositório:**
+   ```sh
+   git clone <url-do-repositorio>
+   ```
+
+2. **Mude para a branch de desenvolvimento:**
+   ```sh
+   git checkout dev
+   ```
+
+3. **Atualize a branch local:**
+   ```sh
+   git pull
+   ```
+
+4. **Verifique o status:**
+   ```sh
+   git status
+   ```
+
+5. **Salvar alterações temporariamente (se necessário):**
+   ```sh
+   git stash
+   ```
+
+6. **Adicionar alterações ao staging:**
+   ```sh
+   git add .
+   ```
+
+7. **Fazer um commit:**
+   ```sh
+   git commit -m "Descrição do que foi feito"
+   ```
+
+8. **Enviar alterações para o repositório remoto:**
+   ```sh
+   git push -u origin dev
+   ```
+
+9. **Trabalhando com Git Flow:**
+
+   - **Inicializar Git Flow (somente uma vez):**
+     ```sh
+     git flow init
+     ```
+
+   - **Criar uma nova feature:**
+     ```sh
+     git flow feature start nome-da-feature
+     ```
+
+   - **Finalizar uma feature:**
+     ```sh
+     git flow feature finish nome-da-feature
+     ```
+
+   - **Criar uma release:**
+     ```sh
+     git flow release start nome-da-release
+     ```
+
+   - **Finalizar uma release:**
+     ```sh
+     git flow release finish nome-da-release
+     ```
+
+   - **Criar um hotfix:**
+     ```sh
+     git flow hotfix start nome-do-hotfix
+     ```
+
+   - **Finalizar um hotfix:**
+     ```sh
+     git flow hotfix finish nome-do-hotfix
+     ```
+
+Esse guia cobre os comandos básicos de Git e a utilização do Git Flow para gerenciamento de branches, facilitando o desenvolvimento colaborativo e a entrega contínua.
