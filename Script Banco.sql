@@ -13,7 +13,7 @@ CREATE TABLE users(
 	name VARCHAR(255) NOT NULL,
 	email VARCHAR(75) NOT NULL,
 	document VARCHAR(18) UNIQUE NOT NULL,
-	birth_date TIMESTAMP NULL,
+	birth_date DATE NULL,
 	biography VARCHAR(511) NULL,
 	profile_picture VARCHAR (511) NULL,
 	user_type_id INTEGER, FOREIGN KEY (user_type_id) REFERENCES user_types(id),
