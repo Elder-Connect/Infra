@@ -37,13 +37,11 @@ CREATE TABLE messages(
 
 CREATE TABLE proposals(
 	id SERIAL PRIMARY KEY,
-	content VARCHAR(255),
-	date_time TIMESTAMP,
+	description VARCHAR(255),
 	day_start_time TIMESTAMP,
 	day_time_end TIMESTAMP,
 	price NUMERIC(10,2),
-	recipient_id INTEGER, FOREIGN KEY (recipient_id) REFERENCES users(id),
-	sender_id INTEGER, FOREIGN KEY (sender_id) REFERENCES users(id)
+	message_id INTEGER, FOREIGN KEY (message_id) REFERENCES messages(id)
 );
 
 CREATE TABLE ratings(
