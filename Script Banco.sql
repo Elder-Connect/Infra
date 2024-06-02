@@ -41,6 +41,7 @@ CREATE TABLE proposals(
 	day_start_time TIMESTAMP,
 	day_time_end TIMESTAMP,
 	price NUMERIC(10,2),
+	accepted BOOLEAN,
 	message_id INTEGER, FOREIGN KEY (message_id) REFERENCES messages(id)
 );
 

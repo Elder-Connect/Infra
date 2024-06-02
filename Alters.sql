@@ -1,1 +1,1 @@
-alter table users alter column document type VARCHAR(18);
+ALTER TABLE proposals ADD COLUMN accepted BOOLEAN;
