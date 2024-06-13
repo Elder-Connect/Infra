@@ -49,6 +49,7 @@ Aceite as configurações padrão, que geralmente são:
 - Branch de desenvolvimento: `dev`
 - Prefixos para branches de test: `test/`
 - Prefixos para branches de tests: `tests/`
+- Prefixos para branches de suporte: `refactor/`
 - Prefixos para branches de polishs: `polishs/`
 - Prefixos para branches de features: `feature/`
 - Prefixos para branches de releases: `release/`
