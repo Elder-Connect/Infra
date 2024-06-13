@@ -1,0 +1,46 @@
+Estrutura do Projeto.
+
+- **Banco de Dados (Bd):** Armazena os dados persistentes.
+- **BackEnd:** Conecta-se ao banco de dados, processa a lógica de negócios e fornece dados ao front-end.
+- **FrontEnd:** Interface do usuário que consome os dados fornecidos pelo backend.
+
+Camadas BackEnd:
+### Pacotes e Suas Funções:
+
+#### 1. **Config:**
+   - **Descrição:** Tudo que for relacionado a dados, será implementado aqui.
+   - **Responsabilidades:** Operações de CRUD (Create, Read, Update, Delete), consultas personalizadas.
+
+#### 2. **Entity:**
+   - **Descrição:** As entidades são as classes que representam o modelo de dados.
+   - **Responsabilidades:** Mapear os objetos Java para tabelas do banco de dados.
+
+#### 3. **Enums:**
+   - **Descrição:** Pacote para armazenar enumeradores.
+   - **Responsabilidades:** Definir conjuntos de constantes tipadas, utilizadas em várias partes da aplicação.
+
+#### 4. **Exceptions:**
+   - **Descrição:** Pacote para armazenar erros customizados.
+   - **Responsabilidades:** Definir exceções específicas para a aplicação, melhorando a clareza e o manejo de erros.
+
+#### 5. **Repository:**
+   - **Descrição:** Tudo que for relacionado a dados, será implementado aqui.
+   - **Responsabilidades:** Operações de CRUD (Create, Read, Update, Delete), consultas personalizadas.
+
+#### 6. **Service:**
+   - **Descrição:** Responsável por processar os dados, validações de campos.
+   - **Responsabilidades:** Lógica de negócios, validações, manipulação de dados recebidos e enviados pelo repositório.
+
+#### 7. **Controller:**
+   - **Descrição:** Responsável por mandar os dados para o front-end.
+   - **Responsabilidades:** Receber requisições HTTP, chamar serviços apropriados, enviar respostas HTTP.
+
+#### 8. **DTO (Data Transfer Object):**
+   - **Descrição:** Serve para transferir as informações, sendo cópias das entidades, mas sem anotações de persistência.
+   - **Responsabilidades:** Facilitar a transferência de dados entre a camada de controle e a camada de serviço.
+
+#### 9. **Web (contendo Controllers e DTOs):**
+   - **Descrição:** Pacote para componentes específicos da web, incluindo controladores e DTOs diferentes dos utilizados no backend.
+   - **Responsabilidades:**
+     - **Controllers:** Gerenciar a comunicação entre o front-end e o backend.
+     - **DTOs:** Transferir dados específicos para as requisições web.
