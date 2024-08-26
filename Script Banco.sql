@@ -1,69 +1,74 @@
-CREATE TABLE genders(
-	id SERIAL PRIMARY KEY,
+CREATE SCHEMA elder_ly;
+
+CREATE SEQUENCE elder_ly.seq_co_user_type;
+CREATE TABLE tb_user_types(
+	co_user_type BIGINT PRIMARY KEY,
 	name VARCHAR(25)
 );
 
-CREATE TABLE user_types(
-	id SERIAL PRIMARY KEY,
+CREATE SEQUENCE elder_ly.seq_co_gender;
+CREATE TABLE tb_genders(
+	co_gender BIGINT PRIMARY KEY,
 	name VARCHAR(25)
 );
 
-CREATE TABLE users(
-	id SERIAL PRIMARY KEY,
+CREATE SEQUENCE elder_ly.seq_co_user;
+CREATE TABLE tb_users(
+	co_user BIGINT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
 	email VARCHAR(75) NOT NULL,
 	document VARCHAR(18) UNIQUE NOT NULL,
 	birth_date DATE NULL,
 	biography VARCHAR(511) NULL,
 	profile_picture VARCHAR (511) NULL,
-	user_type_id INTEGER, FOREIGN KEY (user_type_id) REFERENCES user_types(id),
-	gender_id INTEGER NULL, FOREIGN KEY (gender_id) REFERENCES genders(id)
+	user_type_id INTEGER, FOREIGN KEY (user_type_id) REFERENCES tb_user_types(co_user_type),
+	gender_id INTEGER, FOREIGN KEY (gender_id) REFERENCES tb_genders(co_gender)
 );
 
-CREATE TABLE calendars(
-	id SERIAL PRIMARY KEY,
+CREATE SEQUENCE elder_ly.seq_co_calendar;
+CREATE TABLE tb_calendars(
+	co_calendar BIGINT PRIMARY KEY,
 	calendar_id VARCHAR(255),
 	type VARCHAR(45),
-	user_id INTEGER, FOREIGN KEY (user_id) REFERENCES users(id)
+	user_id INTEGER, FOREIGN KEY (user_id) REFERENCES tb_users(co_user)
 );
 
-CREATE TABLE messages(
-	id SERIAL PRIMARY KEY,
+CREATE SEQUENCE elder_ly.seq_co_message;
+CREATE TABLE tb_messages(
+	co_message BIGINT PRIMARY KEY,
 	content VARCHAR(511),
 	date_time TIMESTAMP,
-	recipient_id INTEGER, FOREIGN KEY (recipient_id) REFERENCES users(id),
-	sender_id INTEGER, FOREIGN KEY (sender_id) REFERENCES users(id)
+	recipient_id INTEGER, FOREIGN KEY (recipient_id) REFERENCES tb_users(co_user),
+	sender_id INTEGER, FOREIGN KEY (sender_id) REFERENCES tb_users(co_user)
 );
 
-CREATE TABLE proposals(
-	id SERIAL PRIMARY KEY,
+CREATE SEQUENCE elder_ly.seq_co_proposal;
+CREATE TABLE tb_proposals(
+	co_proposal BIGINT PRIMARY KEY,
 	description VARCHAR(255),
 	day_start_time TIMESTAMP,
 	day_time_end TIMESTAMP,
 	price NUMERIC(10,2),
 	accepted BOOLEAN,
-	message_id INTEGER, FOREIGN KEY (message_id) REFERENCES messages(id)
+	message_id INTEGER, FOREIGN KEY (message_id) REFERENCES messages(co_message)
 );
 
-CREATE TABLE ratings(
-	id SERIAL PRIMARY KEY,
-	rating INT,
-	proposal_id INTEGER, FOREIGN KEY (proposal_id) REFERENCES proposals(id)
-);
-
-CREATE TABLE specialties(
-	id SERIAL PRIMARY KEY,
+CREATE SEQUENCE elder_ly.seq_co_specialtie;
+CREATE TABLE tb_specialties(
+	co_specialtie BIGINT PRIMARY KEY,
 	name VARCHAR(100)
 );
 
-CREATE TABLE resumes(
-	id SERIAL PRIMARY KEY,
-	user_id SERIAL, FOREIGN KEY (user_id) REFERENCES users(id),
-	specialtie_id INTEGER NULL, FOREIGN KEY (specialtie_id) REFERENCES specialties(id) 
+CREATE SEQUENCE elder_ly.seq_co_resume;
+CREATE TABLE tb_resumes(
+	co_resume BIGINT PRIMARY KEY,
+	user_id SERIAL, FOREIGN KEY (user_id) REFERENCES tb_users(co_user),
+	specialtie_id INTEGER NULL, FOREIGN KEY (specialtie_id) REFERENCES tb_specialties(co_specialtie) 
 );
 
-CREATE TABLE adresses(
-	id SERIAL PRIMARY KEY,
+CREATE SEQUENCE elder_ly.seq_co_adresse;
+CREATE TABLE tb_adresses(
+	co_adresse BIGINT PRIMARY KEY,
 	zip_code VARCHAR(10),
 	street VARCHAR(255),
 	complement VARCHAR(10) NULL,
@@ -73,9 +78,10 @@ CREATE TABLE adresses(
 	uf VARCHAR(4)
 );
 
-CREATE TABLE residences(
-	id SERIAL,
-	user_id INTEGER, FOREIGN KEY (user_id) REFERENCES users(id),
-	adresse_id INTEGER, FOREIGN KEY (adresse_id) REFERENCES adresses(id),
+CREATE SEQUENCE elder_ly.seq_co_residence;
+CREATE TABLE tb_residences(
+	co_residence BIGINT,
+	user_id INTEGER, FOREIGN KEY (user_id) REFERENCES users(co_user),
+	adresse_id INTEGER, FOREIGN KEY (adresse_id) REFERENCES adresses(co_adresse),
 	PRIMARY KEY (id, user_id, adresse_id)
 );
