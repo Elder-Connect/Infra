@@ -1,81 +1,88 @@
-CREATE TABLE genders(
-	id SERIAL PRIMARY KEY,
-	name VARCHAR(25)
+-- CREATE IF NOT EXIST SCHEMA elder_ly;
+
+-- CREATE SEQUENCE elder_ly.seq_co_user_type;
+-- CREATE SEQUENCE elder_ly.seq_co_gender;
+-- CREATE SEQUENCE elder_ly.seq_co_user;
+-- CREATE SEQUENCE elder_ly.seq_co_calendar;
+-- CREATE SEQUENCE elder_ly.seq_co_message;
+-- CREATE SEQUENCE elder_ly.seq_co_proposal;
+-- CREATE SEQUENCE elder_ly.seq_co_specialtie;
+-- CREATE SEQUENCE elder_ly.seq_co_resume;
+-- CREATE SEQUENCE elder_ly.seq_co_adresse;
+-- CREATE SEQUENCE elder_ly.seq_co_residence;
+
+CREATE TABLE elder_ly.tb_user_types(
+    co_user_type BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_user_type'),
+    name VARCHAR(25)
 );
 
-CREATE TABLE user_types(
-	id SERIAL PRIMARY KEY,
-	name VARCHAR(25)
+CREATE TABLE elder_ly.tb_genders(
+    co_gender BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_gender'),
+    name VARCHAR(25)
 );
 
-CREATE TABLE users(
-	id SERIAL PRIMARY KEY,
-	name VARCHAR(255) NOT NULL,
-	email VARCHAR(75) NOT NULL,
-	document VARCHAR(18) UNIQUE NOT NULL,
-	birth_date DATE NULL,
-	biography VARCHAR(511) NULL,
-	profile_picture VARCHAR (511) NULL,
-	user_type_id INTEGER, FOREIGN KEY (user_type_id) REFERENCES user_types(id),
-	gender_id INTEGER NULL, FOREIGN KEY (gender_id) REFERENCES genders(id)
+CREATE TABLE elder_ly.tb_users(
+    co_user BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_user'),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(75) NOT NULL,
+    document VARCHAR(18) UNIQUE NOT NULL,
+    birth_date DATE NULL,
+    biography VARCHAR(511) NULL,
+    profile_picture VARCHAR(511) NULL,
+    user_type_id BIGINT REFERENCES elder_ly.tb_user_types(co_user_type),
+    gender_id BIGINT REFERENCES elder_ly.tb_genders(co_gender)
 );
 
-CREATE TABLE calendars(
-	id SERIAL PRIMARY KEY,
-	calendar_id VARCHAR(255),
-	type VARCHAR(45),
-	user_id INTEGER, FOREIGN KEY (user_id) REFERENCES users(id)
+CREATE TABLE elder_ly.tb_calendars(
+    co_calendar BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_calendar'),
+    calendar_id VARCHAR(255),
+    type VARCHAR(45),
+    user_id BIGINT REFERENCES elder_ly.tb_users(co_user)
 );
 
-CREATE TABLE messages(
-	id SERIAL PRIMARY KEY,
-	content VARCHAR(511),
-	date_time TIMESTAMP,
-	recipient_id INTEGER, FOREIGN KEY (recipient_id) REFERENCES users(id),
-	sender_id INTEGER, FOREIGN KEY (sender_id) REFERENCES users(id)
+CREATE TABLE elder_ly.tb_messages(
+    co_message BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_message'),
+    content VARCHAR(511),
+    date_time TIMESTAMP,
+    recipient_id BIGINT REFERENCES elder_ly.tb_users(co_user),
+    sender_id BIGINT REFERENCES elder_ly.tb_users(co_user)
 );
 
-CREATE TABLE proposals(
-	id SERIAL PRIMARY KEY,
-	description VARCHAR(255),
-	day_start_time TIMESTAMP,
-	day_time_end TIMESTAMP,
-	price NUMERIC(10,2),
-	accepted BOOLEAN,
-	message_id INTEGER, FOREIGN KEY (message_id) REFERENCES messages(id)
+CREATE TABLE elder_ly.tb_proposals(
+    co_proposal BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_proposal'),
+    description VARCHAR(255),
+    day_start_time TIMESTAMP,
+    day_time_end TIMESTAMP,
+    price NUMERIC(10,2),
+    accepted BOOLEAN,
+    message_id BIGINT REFERENCES elder_ly.tb_messages(co_message)
 );
 
-CREATE TABLE ratings(
-	id SERIAL PRIMARY KEY,
-	rating INT,
-	proposal_id INTEGER, FOREIGN KEY (proposal_id) REFERENCES proposals(id)
+CREATE TABLE elder_ly.tb_specialties(
+    co_specialtie BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_specialtie'),
+    name VARCHAR(100)
 );
 
-CREATE TABLE specialties(
-	id SERIAL PRIMARY KEY,
-	name VARCHAR(100)
+CREATE TABLE elder_ly.tb_resumes(
+    co_resume BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_resume'),
+    user_id BIGINT REFERENCES elder_ly.tb_users(co_user),
+    specialtie_id BIGINT NULL REFERENCES elder_ly.tb_specialties(co_specialtie)
 );
 
-CREATE TABLE resumes(
-	id SERIAL PRIMARY KEY,
-	user_id SERIAL, FOREIGN KEY (user_id) REFERENCES users(id),
-	specialtie_id INTEGER NULL, FOREIGN KEY (specialtie_id) REFERENCES specialties(id) 
+CREATE TABLE elder_ly.tb_adresses(
+    co_adresse BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_adresse'),
+    zip_code VARCHAR(10),
+    street VARCHAR(255),
+    complement VARCHAR(10) NULL,
+    neighborhood VARCHAR(225),
+    number VARCHAR(10) NULL,
+    city VARCHAR(25),
+    uf VARCHAR(4)
 );
 
-CREATE TABLE adresses(
-	id SERIAL PRIMARY KEY,
-	zip_code VARCHAR(10),
-	street VARCHAR(255),
-	complement VARCHAR(10) NULL,
-	neighborhood VARCHAR(225),
-	number VARCHAR(10) NULL,
-	city VARCHAR(25),
-	uf VARCHAR(4)
-);
-
-CREATE TABLE residences(
-	id SERIAL,
-	user_id INTEGER, FOREIGN KEY (user_id) REFERENCES users(id),
-	adresse_id INTEGER, FOREIGN KEY (adresse_id) REFERENCES adresses(id),
-	PRIMARY KEY (id, user_id, adresse_id)
+CREATE TABLE elder_ly.tb_residences(
+    co_residence BIGINT DEFAULT nextval('elder_ly.seq_co_residence'),
+    user_id BIGINT REFERENCES elder_ly.tb_users(co_user),
+    adresse_id BIGINT REFERENCES elder_ly.tb_adresses(co_adresse),
+    PRIMARY KEY (co_residence, user_id, adresse_id)
 );
