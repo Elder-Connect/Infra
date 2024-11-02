@@ -1,0 +1,13 @@
+# Base image
+FROM postgres:latest
+
+# Set environment variables for database configuration
+ENV POSTGRES_DB=elder_ly
+ENV POSTGRES_USER=backend
+ENV POSTGRES_PASSWORD=postgree_backend
+
+# Copy the init.sql file into the Docker image
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Expose the default PostgreSQL port
+EXPOSE 5432
