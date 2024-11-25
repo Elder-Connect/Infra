@@ -12,6 +12,7 @@ CREATE SEQUENCE elder_ly.seq_co_specialtie;
 CREATE SEQUENCE elder_ly.seq_co_resume;
 CREATE SEQUENCE elder_ly.seq_co_adresse;
 CREATE SEQUENCE elder_ly.seq_co_residence;
+CREATE SEQUENCE elder_ly.seq_co_profit;
 
 CREATE TABLE elder_ly.tb_user_types(
     co_user_type BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_user_type'),
@@ -87,6 +88,12 @@ CREATE TABLE elder_ly.tb_residences(
     user_id BIGINT REFERENCES elder_ly.tb_users(co_user),
     adresse_id BIGINT REFERENCES elder_ly.tb_adresses(co_adresse),
     PRIMARY KEY (co_residence, user_id, adresse_id)
+);
+
+CREATE TABLE elder_ly.tb_profit(
+    co_profit BIGINT PRIMARY KEY DEFAULT nextval('elder_ly.seq_co_profit'),
+	profit DECIMAL (15, 2),
+    user_id BIGINT REFERENCES elder_ly.tb_users(co_user)
 );
 
 INSERT INTO elder_ly.tb_genders (name) values
